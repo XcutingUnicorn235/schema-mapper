@@ -1,0 +1,11 @@
+_ > nanoagent.plugin.v0001.ProductConfig:
+tagline: "Map every column of a messy customer export onto one schema"
+summary: "Schema Mapper shows a model a customer export from another system, ten columns with headers like KUNDENNR, e-mail addr or fld_07 and four sample values each, and asks which field of one target schema each column holds, or that it fits none. Its answer is graded against the answer key of the seeded generator that made the export, which the model never sees."
+highlights:
+  - "Headers in four languages, vendor codes and meaningless names, so the sample values have to be read"
+  - "Decoys like a last-login date or a credit limit that look like a field but are not one"
+  - "Scored so that leaving everything unmapped, one field for everything or random fields earn nothing"
+steps:
+  - "Ask for a case, from 0 to 999"
+  - "The model reads the export's ten columns and picks a target field, or unmapped, for each"
+  - "The verifier compares the mapping with the answer key and shows which columns were wrong"

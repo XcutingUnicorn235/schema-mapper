@@ -1,0 +1,37 @@
+_ > nanoagent.plugin.v0001.ManifestConfig:
+id: schema-mapper
+name: Schema Mapper
+version: 0.1.0
+status: ready
+spec: nanoagent.plugin/v0001
+
+runtime > nanoagent.plugin.v0001.RuntimeConfig:
+  type: mcp_stdio
+  command: [uv, run, --frozen, python, -m, plugin]
+
+permissions > nanoagent.plugin.v0001.PermissionsConfig:
+  network > nanoagent.plugin.v0001.NetworkConfig:
+    hosts: []
+  filesystem > nanoagent.plugin.v0001.FilesystemConfig:
+    write: [workspace]
+
+# One entry per contract.Tool; its input and output classes are contract.TOOLS's.
+tools > dict[contract.Tool, nanoagent.plugin.v0001.ToolConfig]:
+  pin_mapping:
+    description: Make a case's answer key with the pinned seeded generator, the true target field of every column; the task's answer key, never shown to the model
+  read_export:
+    description: Show a case's customer export of 10 columns, each with its header, four sample values and facts computed from them (character patterns, length range, share of digits)
+
+# One entry per contract.Task; its input and output classes are contract.TASKS's.
+tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
+  map-columns:
+    description: Decide which target field each column of a messy customer export holds
+    runner: decide
+    tools: [read_export]
+    reference: pin_mapping
+    instructions: |-
+      1. Read the export with read_export.
+      2. For each of its 10 columns choose the target field it holds, from its header and its sample values together. Headers may be abbreviated, in German, Spanish or French, a vendor system's names, or say nothing (like fld_07); a vague header (Code, Cd, Nr., Datum, Name) can be any field of its kind. Then the values decide. birth_date is a date of birth; signup_date the day the customer's account was opened; lifetime_value the money the customer has spent in total; full_name holds given name and surname together.
+      3. Use each field for at most one column.
+      4. Choose unmapped for a column that fits no field: internal reference or promo codes, categories, flags and notes, and a column whose header names something that is not a target field (like a last-login date or a credit limit), even when its values look like a field's.
+      5. Submit the case and the field of every column, col01 to col10.
