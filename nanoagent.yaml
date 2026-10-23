@@ -1,7 +1,7 @@
 _ > nanoagent.plugin.v0001.ManifestConfig:
 id: schema-mapper
 name: Schema Mapper
-version: 0.1.0
+version: 0.2.0
 status: ready
 spec: nanoagent.plugin/v0001
 
@@ -35,3 +35,4 @@ tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
       3. Use each field for at most one column.
       4. Choose unmapped for a column that fits no field: internal reference or promo codes, categories, flags and notes, and a column whose header names something that is not a target field (like a last-login date or a credit limit), even when its values look like a field's.
       5. Submit the case and the field of every column, col01 to col10.
+      6. Each answer, your thinking included, must fit in 2,048 tokens, and an answer cut off scores 0 for the whole case: think at most a line per column. The answer itself is only the JSON asked for.

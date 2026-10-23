@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nanoagent-schema-mapper"
-version = "0.1.0"
+version = "0.2.0"
 description = "Schema Mapper: decide which target field each column of a messy customer export holds"
 requires-python = ">=3.12"
 dependencies = ["mcp>=1.27,<2", "slimconfig"]
